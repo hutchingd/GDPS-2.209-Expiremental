@@ -211,6 +211,19 @@ CREATE TABLE `friendships` (
 -- --------------------------------------------------------
 
 --
+-- Структура таблицы `follows`
+--
+
+CREATE TABLE `follows` (
+  `ID` int(11) NOT NULL,
+  `accountID` int(11) NOT NULL,
+  `targetAccountID` int(11) NOT NULL,
+  `timestamp` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Структура таблицы `gauntlets`
 --
 
@@ -726,6 +739,14 @@ ALTER TABLE `friendships`
   ADD KEY `isNew2` (`isNew2`);
 
 --
+-- Индексы таблицы `follows`
+--
+ALTER TABLE `follows`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `accountID` (`accountID`),
+  ADD KEY `targetAccountID` (`targetAccountID`);
+
+--
 -- Индексы таблицы `gauntlets`
 --
 ALTER TABLE `gauntlets`
@@ -975,6 +996,12 @@ ALTER TABLE `friendreqs`
 -- AUTO_INCREMENT для таблицы `friendships`
 --
 ALTER TABLE `friendships`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT для таблицы `follows`
+--
+ALTER TABLE `follows`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
 
 --

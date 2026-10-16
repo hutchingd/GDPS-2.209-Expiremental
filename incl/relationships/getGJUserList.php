@@ -17,6 +17,12 @@ if($type == 0){
 	$query = "SELECT person1,isNew1,person2,isNew2 FROM friendships WHERE person1 = :accountID OR person2 = :accountID";
 }else if($type==1){
 	$query = "SELECT person1,person2 FROM blocks WHERE person1 = :accountID";
+}else if($type==3){ // Added in 2.209 - accounts you follow
+	$query = "SELECT targetAccountID AS person1, 0 AS isNew1, targetAccountID AS person2, 0 AS isNew2 FROM follows WHERE accountID = :accountID";
+}else if($type==4){ // Added in 2.209 - accounts following you
+	$query = "SELECT accountID AS person1, 0 AS isNew1, accountID AS person2, 0 AS isNew2 FROM follows WHERE targetAccountID = :accountID";
+}else{
+	exit("-1");
 }
 $query = $db->prepare($query);
 $query->execute([':accountID' => $accountID]);
